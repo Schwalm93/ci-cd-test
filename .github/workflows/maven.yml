@@ -33,6 +33,7 @@ jobs:
         path: target/*.jar
 
   createDocker:
+    needs: build
     runs-on: ubuntu-latest
     services:
       docker:
@@ -46,7 +47,7 @@ jobs:
     - name: Build Docker
       run: docker build -t ghcr.io/Schwalm93/ci-cd-test .
     - name: Login to Docker
-      run: docker login ghcr.io --username ${{ DOCKER_TOKEN }} --password ${{ DOCKER_TOKEN }}
+      run: docker login ghcr.io --username ${{ secrets.DOCKER_TOKEN }} --password ${{ secrets.DOCKER_TOKEN }}
     - name: Push to Docker
       run: docker push ghcr.io/Schwalm93/ci-cd-test
 
