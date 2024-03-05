@@ -33,6 +33,7 @@ jobs:
         path: target/*.jar
 
   createDocker:
+    runs-on: ubuntu-latest
     services:
       docker:
         image: docker:latest
